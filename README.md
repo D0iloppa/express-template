@@ -185,7 +185,7 @@ ISC License
 
 ## 👨‍💻 Author / 작성자
 
-D0IL
+D0ILoppa
 
 ---
 
