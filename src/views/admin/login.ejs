@@ -1,0 +1,20 @@
+<% title = '관리자 로그인' %>
+<% customCss = 'login.css' %>
+
+<div class="login-container">
+  <h2>🧑‍🚀 관리자 로그인</h2>
+
+  <form method="POST" action="/admin/loginPost" class="login-form">
+
+    <input type="text" name="username" placeholder="l0g1n" autocomplete="username" required />
+    <input type="password" name="password" placeholder="••••••••" autocomplete="current-password" required />
+
+    <button type="submit">로그인</button>
+
+    <% if (error) { %>
+      <p class="error"><%= error %></p>
+    <% } %>
+
+    <p class="register-link">계정이 없으신가요?</p>
+  </form>
+</div>

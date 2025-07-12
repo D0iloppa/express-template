@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ERROR <%= typeof code !== 'undefined' ? code : '500' %> | L0G1N API</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  
+  <link href="<%= baseUrl %>/vendors/prism/prism.min.css" rel="stylesheet" />
+  <link href="<%= baseUrl %>/css/common.css" rel="stylesheet" />
+
+
+</head>
+<body>
+
+  <!-- 개선된 🌞/🌙 토글 스위치 -->
+  <div class="theme-switch" onclick="toggleTheme()" title="Toggle Theme">
+    <span class="theme-icon sun-icon">☀️</span>
+    <div class="theme-switch-container">
+      <div class="switch-knob"></div>
+    </div>
+    <span class="theme-icon moon-icon">🌙</span>
+  </div>
+
+  <h1>🚨 ERROR <%= typeof code !== 'undefined' ? code : '500' %></h1>
+
+  <div style="display: flex;">
+    <strong>Something went wrong! </strong> 
+    <span style="margin-left:1.5rem">
+        <a href="/">🏠 홈으로 돌아가기</a>
+    </span>
+  </div>
+  
+  <h2>🔍 오류 정보</h2>
+  <pre><code class="language-bash">
+📊 Status Code: <%= typeof code !== 'undefined' ? code : '500' %>
+📝 Message: <%= typeof message !== 'undefined' ? message : 'Internal Server Error' %>
+📍 Path: <%= typeof path !== 'undefined' ? path : 'N/A' %>
+<% if (typeof error !== 'undefined' && error.stack) { %>
+📍 Stack Trace:
+<%= error.stack %>
+<% } %>
+  </code></pre>
+
+  <h2>🛠️ 가능한 해결책</h2>
+  <ul>
+    <li><code>404 오류</code> → 요청한 페이지나 API 경로를 확인해주세요</li>
+    <li><code>500 오류</code> → 서버 내부 오류가 발생했습니다</li>
+    <li><code>401/403 오류</code> → 인증 또는 권한을 확인해주세요</li>
+    <li><code>기타 오류</code> → 관리자에게 문의하세요</li>
+  </ul>
+
+  <h2>🔗 유용한 링크</h2>
+  <p>📘 <a href="./docs">API 문서 보기</a></p>
+  <p>🧑‍🚀 <a href="./admin/login">관리자 콘솔</a></p>
+
+  <h2>🧠 디버깅 정보</h2>
+  <pre><code class="language-javascript">// 오류 발생 시 확인사항
+const debugInfo = {
+  timestamp: "<%= new Date().toISOString() %>",
+  code: <%= typeof code !== 'undefined' ? code : '500' %>,
+  message: "<%= typeof message !== 'undefined' ? message : 'Internal Server Error' %>",
+  path: "<%= typeof path !== 'undefined' ? path : 'N/A' %>"
+};
+
+console.log('Debug Info:', debugInfo);
+  </code></pre>
+
+  <div class="timestamp">⚠️ 오류 발생 시각: <%= new Date().toLocaleString('ko-KR') %></div>
+
+
+
+  
+  <script src="<%= baseUrl %>/vendors/prism/prism.min.js"></script>
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('light-mode');
+      
+      // 사용자 선택을 localStorage에 저장
+      const isLightMode = document.body.classList.contains('light-mode');
+      localStorage.setItem('theme', isLightMode ? 'light' : 'dark');
+    }
+    
+    // 페이지 로드 시 저장된 테마 적용
+    document.addEventListener('DOMContentLoaded', function() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'light') {
+        document.body.classList.add('light-mode');
+      }
+      
+      // Prism.js 하이라이팅 실행
+      if (typeof Prism !== 'undefined') {
+        Prism.highlightAll();
+      }
+    });
+  </script>
+</body>
+</html>

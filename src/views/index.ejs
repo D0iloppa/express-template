@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WELCOME to l0g1n API</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+
+  <h1>🐋 L0G1N API SERVER IS ON!</h1>
+
+  <div style="display: flex;">
+    <strong>hEllo W0rld! </strong> 
+    <span style="margin-left:1.5rem">
+        <a href="./admin/login">🧑‍🚀 관리자 콘솔</a>
+    </span>
+  </div>
+  
+
+
+  <h2>🔗 API 문서</h2>
+  <p>📘 <a href="./docs">Swagger 문서 보기</a></p>
+
+  <h2>📦 프로젝트 디렉토리</h2>
+  <pre><code class="language-bash">
+📂src/
+ ├── 📂public/
+ ├── 📂routes/
+ ├── 📂controllers/
+ ├── 📂services/
+ ├── 📂views/
+ ├── 📂db/
+ └── 📄app.js
+  </code></pre>
+
+
+
+  <h2>🧠 설명</h2>
+  <pre><code class="language-javascript">// 예: 컨트롤러에서 요청 처리
+exports.login = async (req, res) => {
+  const { login_id, password } = req.body;
+  const token = await AuthService.login(login_id, password);
+  res.json({ token });
+};
+  </code></pre>
+
+  <ul>
+    <li><code>routes/</code> → 경로 설정</li>
+    <li><code>controllers/</code> → 요청 처리 로직</li>
+    <li><code>services/</code> → 비즈니스 로직</li>
+    <li><code>views/</code> → EJS 기반 SSR 페이지</li>
+    <li><code>db/</code> → PostgreSQL 연결</li>
+  </ul>
+
+  <div class="timestamp">✨ 생성 시각: <%= timestamp %></div>
+</body>
+</html>

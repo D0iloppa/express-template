@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title><%= title %> | doil-sb</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <link href="<%= baseUrl %>/vendors/prism/prism.min.css" rel="stylesheet" />
+  <link href="<%= baseUrl %>/css/common.css" rel="stylesheet" />
+  
+  <!-- SweetAlert2 CSS -->
+  <link rel="stylesheet" href="<%= baseUrl %>/vendors/sweetalert2/sweetalert2.min.css" />
+  
+  <!-- Toastify-js CSS -->
+  <link rel="stylesheet" href="<%= baseUrl %>/vendors/toastify/toastify.css" />
+
+  <% if (typeof customCss !== 'undefined' && customCss) { %>
+    <link rel="stylesheet" href="/css/<%= customCss %>" />
+  <% } %>
+  
+</head>
+<body class="bg-gray-900">
+  <!-- 개선된 🌞/🌙 토글 스위치 -->
+  <div class="theme-switch" onclick="toggleTheme()" title="Toggle Theme">
+    <span class="theme-icon sun-icon">☀️</span>
+    <div class="theme-switch-container">
+      <div class="switch-knob"></div>
+    </div>
+    <span class="theme-icon moon-icon">🌙</span>
+  </div>
+
+  <div class="main-content">
+    <%- body %>
+  </div>
+
+
+  <!-- SweetAlert2 JS -->
+  <script src="<%= baseUrl %>/vendors/sweetalert2/sweetalert2.all.min.js"></script>
+  
+  <!-- Toastify-js JS -->
+  <script src="<%= baseUrl %>/vendors/toastify/toastify.js"></script>
+  
+  <!-- Prism.js -->
+  <script src="<%= baseUrl %>/vendors/prism/prism.min.js"></script>
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('light-mode');
+      
+      // 사용자 선택을 localStorage에 저장
+      const isLightMode = document.body.classList.contains('light-mode');
+      localStorage.setItem('theme', isLightMode ? 'light' : 'dark');
+    }
+    
+    // 페이지 로드 시 저장된 테마 적용
+    document.addEventListener('DOMContentLoaded', function() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'light') {
+        document.body.classList.add('light-mode');
+      }
+      
+      // Prism.js 하이라이팅 실행
+      if (typeof Prism !== 'undefined') {
+        Prism.highlightAll();
+      }
+    });
+    
+    // 전역 유틸리티 함수들
+    window.showToast = function(message, type = 'success') {
+      const backgroundColor = type === 'success' ? '#28a745' : 
+                           type === 'error' ? '#dc3545' : 
+                           type === 'warning' ? '#ffc107' : '#17a2b8';
+      
+      Toastify({
+        text: message,
+        duration: 3000,
+        gravity: "top",
+        position: "right",
+        backgroundColor: backgroundColor,
+        stopOnFocus: true,
+        close: true,
+        style: {
+          borderRadius: "8px",
+          fontSize: "14px",
+          fontWeight: "500"
+        }
+      }).showToast();
+    };
+    
+    window.showConfirm = function(title, text, icon = 'question') {
+      return Swal.fire({
+        title: title,
+        text: text,
+        icon: icon,
+        showCancelButton: true,
+        confirmButtonColor: '#667eea',
+        cancelButtonColor: '#6c757d',
+        confirmButtonText: '확인',
+        cancelButtonText: '취소'
+      });
+    };
+    
+    window.showSuccess = function(title, text = '') {
+      return Swal.fire({
+        title: title,
+        text: text,
+        icon: 'success',
+        confirmButtonColor: '#28a745'
+      });
+    };
+    
+    window.showError = function(title, text = '') {
+      return Swal.fire({
+        title: title,
+        text: text,
+        icon: 'error',
+        confirmButtonColor: '#dc3545'
+      });
+    };
+  </script>
+
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+# 환경변수 파일
+.env
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
+
+# Docker 관련
+docker-compose.override.yml
+docker-compose.override.yaml
+
+# Nginx 인증서
+./nginx/certs/*
+
+# IDE / 편집기
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# 로그 파일
+*.log
+
+# OS별 파일
+.DS_Store
+Thumbs.db

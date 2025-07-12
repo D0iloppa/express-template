@@ -1,0 +1,24 @@
+{
+    "name": "l0g1n-backend",
+    "version": "1.0.0",
+    "description": "backend",
+    "main": "index.js",
+    "scripts": {
+        "start": "node src/app.js",
+        "dev": "nodemon --legacy-watch src/app.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "D0IL",
+    "license": "ISC",
+    "dependencies": {
+        "ejs": "^3.1.10",
+        "express": "^4.21.2",
+        "express-ejs-layouts": "^2.5.1",
+        "express-session": "^1.18.1",
+        "pg": "^8.16.3",
+        "swagger-jsdoc": "^6.2.8",
+        "swagger-ui-express": "^5.0.1",
+        "sweetalert2": "^11.22.2",
+        "toastify-js": "^1.12.0"
+    }
+}
