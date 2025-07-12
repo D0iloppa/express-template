@@ -61,8 +61,7 @@ app.get('/health', (req, res) => {
   });
 });
 
-// ✅ API 라우터 등록 (/login, /logout 등)
-app.use('/api', authRoutes); // or `/api`, if you want separation
+
 
 
 
@@ -74,7 +73,11 @@ app.use(session({
   secret: 'keyboard cat', resave: false, saveUninitialized: true
 }));
 
+// /admin 라우터 등록
 app.use('/admin', adminRoutes);
+
+// ✅ API 라우터 등록 (/login, /logout 등)
+app.use('/api', authRoutes); // or `/api`, if you want separation
 
 
 
@@ -91,6 +94,6 @@ app.use('*', (req, res) => {
 
 // ✅ 서버 실행
 app.listen(PORT, () => {
-  console.log(`🚀 서버가 포트 ${PORT}에서 실행 중입니다.`);
+  console.log(`🐋 서버가 포트 ${PORT}에서 실행 중입니다.`);
   console.log(`📘 Swagger 문서: http://localhost:${PORT}/docs`);
 });
